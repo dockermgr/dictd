@@ -25,7 +25,7 @@ docker run -d \
   -v "/usr/local/share/CasjaysDev/dockermgr/dictd/system/data/var/dictd":/var/lib/share/dictd:z \
   -v "/usr/local/share/CasjaysDev/dockermgr/dictd/system/data/var/dictionaries-common":/var/lib/share/dictionaries-common:z \
   -p 2628:2628 \
-  amaccis/dict dictd -dnodetach --verbose --log /var/log/dictd/dictd.log &>/dev/null
+  amaccis/dict dictd -dnodetach --verbose --log /var/log/dictd/dictd.log 
 ```
 
 ## Author  
