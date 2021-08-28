@@ -9,6 +9,8 @@ dockermgr install dictd
 ### Manual install
 
 ```shell
+git clone "https://github.com/dockermgr/dictd "/usr/local/share/CasjaysDev/scripts/dfmgr/dictd"
+
 docker run -d \
   --name="dictd" \
   --hostname "dictd" \
