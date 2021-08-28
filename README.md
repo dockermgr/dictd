@@ -9,11 +9,11 @@ dockermgr install dictd
 ### Manual install
 
 ```shell
-      --name="$dictd" \
+      --name="dictd" \
       --hostname "dictd" \
       --restart=unless-stopped \
       --privileged \
-      -e TZ="$${TZ:-${TIMEZONE:-America/New_York}}" \
+      -e TZ="${TZ:-${TIMEZONE:-America/New_York}}" \
       -v "/usr/local/share/CasjaysDev/scripts/dfmgr/dictd/system/config/dictd":/etc/dictd:z \
       -v "/usr/local/share/CasjaysDev/scripts/dfmgr/dictd/system/config/dictd.conf":/etc/dictd.conf:z \
       -v "/usr/local/share/CasjaysDev/scripts/dfmgr/dictd/system/data/logs":/var/log/dictd:z \
