@@ -67,6 +67,7 @@ __sudo mkdir -p "$DATADIR/data"
 __sudo mkdir -p "$DATADIR/config"
 __sudo chmod -Rf 777 "$DATADIR"
 [[ -d "/usr/share/dict" ]] && ln -sf /usr/share/dict/* "$DATADIR/data"
+[[ -f "/etc/dictd.conf" ]] && ln -sf "$DATADIR/data/dictd.conf"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -f "$INSTDIR/docker-compose.yml" ] && cmd_exists docker-compose; then
   printf_blue "Installing containers using docker compose"
@@ -86,7 +87,9 @@ else
       --restart=unless-stopped \
       --privileged \
       -e TZ="$dictd_SERVER_TIMEZONE" \
-      -v "$DATADIR/data":/usr/lib/dict:z \
+      -v "$DATADIR/data/dict":/usr/share/dict:z \
+      -v "$DATADIR/data/dictd":/usr/share/dictd:z \
+      -v "$DATADIR/config/dictd":/etc/dictd:z \
       -v "$DATADIR/config/dictd.conf":/etc/dictd.conf:z \
       -p "$dictd_SERVER_PORT":2628 \
       "$DOCKER_HUB_URL" &>/dev/null
