@@ -68,6 +68,8 @@ __sudo mkdir -p "$DATADIR/config"
 __sudo mkdir -p "$DATADIR/logs"
 __sudo chmod -Rf 777 "$DATADIR"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+dockermgr_run_init "$@"
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -f "$INSTDIR/docker-compose.yml" ] && cmd_exists docker-compose; then
   printf_blue "Installing containers using docker compose"
   sed -i "s|REPLACE_DATADIR|$DATADIR" "$INSTDIR/docker-compose.yml"
