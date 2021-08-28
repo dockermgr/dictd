@@ -23,7 +23,8 @@ dockermgr install dictd
       -v "/usr/local/share/CasjaysDev/scripts/dfmgr/dictd/system/data/var/dictionaries-common":/var/lib/share/dictionaries-common:z \
       -p 2628:2628 \
       amaccis/dict --verbose --log /var/log/dictd/dictd.log &>/dev/null
-``
+```
+
 ## Author  
 
 👤 **Jason Hempstead**  
