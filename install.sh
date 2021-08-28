@@ -112,7 +112,7 @@ else
       -v "$DATADIR/data/var/dictd":/var/lib/share/dictd:z \
       -v "$DATADIR/data/var/dictionaries-common":/var/lib/share/dictionaries-common:z \
       -p "$dictd_SERVER_PORT":2628 \
-      "$DOCKER_HUB_URL" &>/dev/null
+      "$DOCKER_HUB_URL" --verbose --log /var/log/dictd/dictd.log &>/dev/null
   fi
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
