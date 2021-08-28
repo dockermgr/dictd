@@ -67,8 +67,6 @@ __sudo mkdir -p "$DATADIR/data"
 __sudo mkdir -p "$DATADIR/config"
 __sudo mkdir -p "$DATADIR/logs"
 __sudo chmod -Rf 777 "$DATADIR"
-[[ -d "/usr/share/dict" ]] && ln -sf /usr/share/dict/* "$DATADIR/data"
-[[ -f "/etc/dictd.conf" ]] && ln -sf "$DATADIR/data/dictd.conf"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -f "$INSTDIR/docker-compose.yml" ] && cmd_exists docker-compose; then
   printf_blue "Installing containers using docker compose"
