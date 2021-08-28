@@ -10,7 +10,8 @@ RUN apt-get update && \
 
 COPY ./system/config/* /etc/dictd/
 COPY ./system/config/dictd.conf /etc/dictd.conf
-COPY ./system/data/* /usr/share/
+COPY ./system/data/usr/* /usr/share/
+COPY ./system/data/var/* /var/lib/
 
 VOLUME /etc/dictd
 VOLUME /usr/share/dictd

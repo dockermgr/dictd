@@ -65,6 +65,7 @@ APPVERSION="$(__appversion "$REPORAW/version.txt")"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 __sudo mkdir -p "$DATADIR/data"
 __sudo mkdir -p "$DATADIR/config"
+__sudo mkdir -p "$DATADIR/logs"
 __sudo chmod -Rf 777 "$DATADIR"
 [[ -d "/usr/share/dict" ]] && ln -sf /usr/share/dict/* "$DATADIR/data"
 [[ -f "/etc/dictd.conf" ]] && ln -sf "$DATADIR/data/dictd.conf"
@@ -87,6 +88,7 @@ else
       --restart=unless-stopped \
       --privileged \
       -e TZ="$dictd_SERVER_TIMEZONE" \
+      -v "$DATADIR/data/logs":/var/log/dictd:z \
       -v "$DATADIR/data/dict":/usr/share/dict:z \
       -v "$DATADIR/data/dictd":/usr/share/dictd:z \
       -v "$DATADIR/config/dictd":/etc/dictd:z \
