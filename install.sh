@@ -44,7 +44,7 @@ printf_exit "This is currently a work in progress"
 
 # Begin installer
 APPNAME="dictd"
-DOCKER_HUB_URL="amaccis/dict"
+DOCKER_HUB_URL="casjaysdev/dictd"
 dictd_SERVER_PORT="${dictd_SERVER_PORT:-2628}"
 dictd_SERVER_HOST="${dictd_SERVER_HOST:-$(hostname -f 2>/dev/null)}"
 REPO="${DOCKERMGRREPO:-https://github.com/dockermgr}/$APPNAME"
@@ -65,9 +65,7 @@ APPVERSION="$(__appversion "$REPORAW/version.txt")"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 __sudo mkdir -p "$DATADIR/data"
 __sudo mkdir -p "$DATADIR/config"
-__sudo mkdir -p "$DATADIR/logs"
 __sudo chmod -Rf 777 "$DATADIR"
-[[ -d "$INSTDIR/system" ]] && cp -Rfva "$INSTDIR/system/." "$DATADIR/" &>/dev/null
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Require a version higher than
 systemmgr_req_version "$APPVERSION"
@@ -106,20 +104,13 @@ else
       --restart=unless-stopped \
       --privileged \
       -e TZ="$dictd_SERVER_TIMEZONE" \
-      -v "$DATADIR/config/dictd":/etc/dictd:z \
-      -v "$DATADIR/config/dictd.conf":/etc/dictd.conf:z \
-      -v "$DATADIR/data/logs":/var/log/dictd:z \
-      -v "$DATADIR/data/usr/dict":/usr/share/dict:z \
-      -v "$DATADIR/data/usr/dictd":/usr/share/dictd:z \
-      -v "$DATADIR/data/var/dictd":/var/lib/share/dictd:z \
-      -v "$DATADIR/data/var/dictionaries-common":/var/lib/share/dictionaries-common:z \
       -p "$dictd_SERVER_PORT":2628 \
       "$DOCKER_HUB_URL" --verbose --log /var/log/dictd/dictd.log &>/dev/null
   fi
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if docker ps -a | grep -qs "$APPNAME"; then
-  printf_blue "Service is available at: http://$dictd_SERVER_HOST:$dictd_SERVER_PORT"
+  printf_blue "Service is available at: $dictd_SERVER_HOST:$dictd_SERVER_PORT"
 else
   false
 fi
