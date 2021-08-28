@@ -8,13 +8,10 @@ RUN apt-get update && \
     apt-get install -yy dict* && \
     apt-get clean
 
-COPY ./system/config/* /etc/dictd/
-COPY ./system/config/dictd.conf /etc/dictd.conf
-COPY ./system/data/usr/* /usr/share/
-COPY ./system/data/var/* /var/lib/
+COPY ./etc/* /etc/
+COPY ./usr/* /usr/
+COPY ./var/* /var/
 
-VOLUME /etc/dictd
-VOLUME /usr/share/dictd
 VOLUME /var/log/dictd
 
 EXPOSE 2628 
