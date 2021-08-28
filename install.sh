@@ -40,6 +40,8 @@ fi
 system_installdirs
 __sudo() { if sudo -n true; then eval sudo "$*"; else eval "$*"; fi; }
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+printf_exit "This is currently a work in progress"
+
 # Begin installer
 APPNAME="dictd"
 DOCKER_HUB_URL="amaccis/dict"
