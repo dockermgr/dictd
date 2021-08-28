@@ -38,7 +38,7 @@ else
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # user system devenv dfmgr dockermgr fontmgr iconmgr pkmgr systemmgr thememgr wallpapermgr
-dockermgr_install
+system_install
 __sudo() { if sudo -n true; then eval sudo "$*"; else eval "$*"; fi; }
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Begin installer
@@ -71,7 +71,7 @@ __sudo chmod -Rf 777 "$DATADIR"
 systemmgr_req_version "$APPVERSION"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Call the systemmgr function
-systemmgr_install
+dockermgr_install
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Script options IE: --help
 show_optvars "$@"
@@ -84,6 +84,7 @@ sudoreq "$0 $*" # sudo required
 #installer_noupdate "$@"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # initialize the installer
+dockermgr_run_init
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -f "$INSTDIR/docker-compose.yml" ] && cmd_exists docker-compose; then
   printf_blue "Installing containers using docker compose"
