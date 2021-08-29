@@ -101,7 +101,8 @@ dockermgr_run_init
 # Ensure directories exist
 ensure_dirs
 ensure_perms
-__sudo mkdir -p "$DATADIR/log"
+__sudo mkdir -p "$DATADIR/data"
+__sudo mkdir -p "$DATADIR/config"
 __sudo chmod -Rf 777 "$APPDIR"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Clone/update the repo
@@ -142,7 +143,8 @@ else
     --restart=unless-stopped \
     --privileged \
     -e TZ="$SERVER_TIMEZONE" \
-    -v "$DATADIR/log":/var/log/dictd \
+    -v "$DATADIR/data":/var/log/dictd \
+    -v "$DATADIR/config":/etc/dictd \
     -p $SERVER_PORT:$SERVER_PORT_INT \
     "$HUB_URL" &>/dev/null
 fi
