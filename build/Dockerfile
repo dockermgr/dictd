@@ -15,10 +15,11 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 COPY ./etc/dictd/. /etc/dictd/
 COPY ./etc/default/dictd /etc/default/dictd
 
-RUN chmod -fv 777 /etc/dictd && chmod 666 -Rfv /etc/dictd
+RUN mkdir -p /var/log/dictd && touch /var/log/dictd/server.log && chmod -Rfv 777 /etc/dictd /var/log/dictd
 
+VOLUME /etc/dictd
 VOLUME /var/log/dictd
 
 EXPOSE 2628
 
-CMD ["dictd", "-dnodetach -v"]
+CMD ["dictd", "-dnodetach"]
