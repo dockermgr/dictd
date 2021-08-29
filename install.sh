@@ -143,7 +143,7 @@ else
     --privileged \
     -e TZ="$SERVER_TIMEZONE" \
     -v "$DATADIR/log":/var/log/dictd \
-    -p $SERVER_IP:$SERVER_PORT:$SERVER_PORT_INT \
+    -p $SERVER_PORT:$SERVER_PORT_INT \
     "$HUB_URL" &>/dev/null
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
