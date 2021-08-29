@@ -34,7 +34,7 @@ cp -Rfva "$HOME/.local/share/srv/docker/dictd/dataDir/." "$HOME/.local/share/srv
 
 sudo docker run -d \
 --name="dictd" \
---hostname "GEN_SCRIPT_REPLACE_APPNAME" \
+--hostname "dictd" \
 --restart=unless-stopped \
 --privileged \
 -e TZ="${TZ:-${TIMEZONE:-America/New_York}}" \
