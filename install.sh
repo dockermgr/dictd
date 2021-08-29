@@ -67,7 +67,7 @@ APPVERSION="$(__appversion "$REPORAW/version.txt")"
 # Setup plugins
 HUB_URL="casjaysdev/dictd"
 SERVER_IP="${CURRIP4:-127.0.0.1}"
-SERVER_HOST="${APPNAME:-$(hostname -f 2>/dev/null)}"
+SERVER_HOST="$(hostname -f 2>/dev/null || echo "$SERVER_IP")"
 SERVER_PORT="${SERVER_PORT:-2628}"
 SERVER_PORT_INT="${SERVER_PORT_INT:-2628}"
 SERVER_PORT_ADMIN="${SERVER_PORT_SSL:-16000}"
