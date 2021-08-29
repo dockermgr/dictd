@@ -22,4 +22,4 @@ VOLUME /var/log/dictd
 
 EXPOSE 2628 
 
-CMD ["dictd", "-dnodetach"]
+CMD ["dictd", "-dnodetach -v"]
