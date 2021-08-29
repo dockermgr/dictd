@@ -143,8 +143,8 @@ else
     --restart=unless-stopped \
     --privileged \
     -e TZ="$SERVER_TIMEZONE" \
-    -v "$DATADIR/data":/var/log/dictd \
-    -v "$DATADIR/config":/etc/dictd \
+    -v "$DATADIR/data":/data \
+    -v "$DATADIR/config":/config \
     -p $SERVER_PORT:$SERVER_PORT_INT \
     "$HUB_URL" &>/dev/null
 fi

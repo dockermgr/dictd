@@ -17,9 +17,6 @@ COPY ./etc/default/dictd /etc/default/dictd
 
 RUN mkdir -p /var/log/dictd && touch /var/log/dictd/server.log && chmod -Rfv 777 /etc/dictd /var/log/dictd
 
-VOLUME /etc/dictd
-VOLUME /var/log/dictd
-
 EXPOSE 2628
 
 CMD ["dictd", "-dnodetach"]
