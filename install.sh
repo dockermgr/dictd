@@ -120,6 +120,7 @@ fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Copy over data files - keep the same stucture as -v dataDir/mnt:/mount
 if [[ -d "$INSTDIR/dataDir" ]] && [[ ! -f "$DATADIR/.installed" ]]; then
+  printf_blue "Copying files to $DATADIR"
   cp -Rf "$INSTDIR/dataDir/." "$DATADIR/"
   touch "$DATADIR/.installed"
 fi
@@ -152,6 +153,7 @@ fi
 # Install nginx proxy
 if [[ ! -f "/etc/nginx/vhosts.d/$APPNAME.conf" ]] && [[ -f "$APPDIR/nginx/proxy.conf" ]]; then
   if __port_not_in_use "$SERVER_PORT"; then
+    printf_green "Copying the nginx configuration"
     __sudo_root cp -Rf "$APPDIR/nginx/proxy.conf" "/etc/nginx/vhosts.d/$APPNAME.conf"
     sed -i "s|REPLACE_APPNAME|$APPNAME|g" "/etc/nginx/vhosts.d/$APPNAME.conf"
     sed -i "s|REPLACE_SERVER_HOST|$SERVER_HOST|g" "/etc/nginx/vhosts.d/$APPNAME.conf"
