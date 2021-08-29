@@ -58,7 +58,7 @@ REPO_BRANCH="${GIT_REPO_BRANCH:-master}"
 # Defaults
 APPNAME="dictd"
 APPDIR="$HOME/.local/share/srv/docker/dictd"
-DATADIR="$HOME/.local/share/srv/docker/files"
+DATADIR="$HOME/.local/share/srv/docker/dictd/files"
 INSTDIR="$HOME/.local/share/dockermgr/dictd"
 REPO="${DOCKERMGRREPO:-https://github.com/dockermgr}/dictd"
 REPORAW="$REPO/raw/$REPO_BRANCH"
