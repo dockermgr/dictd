@@ -98,8 +98,7 @@ dockermgr_run_init
 # Ensure directories exist
 ensure_dirs
 ensure_perms
-__sudo mkdir -p "$DATADIR/data"
-__sudo mkdir -p "$DATADIR/config"
+__sudo mkdir -p "$DATADIR/log"
 __sudo chmod -Rf 777 "$APPDIR"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Clone/update the repo
@@ -139,6 +138,7 @@ else
       --restart=unless-stopped \
       --privileged \
       -e TZ="$SERVER_TIMEZONE" \
+      -v "$DATADIR/log":/var/log/dictd \
       -p $SERVER_PORT:$SERVER_PORT_INT \
       "$HUB_URL" --verbose --log /var/log/dictd/dictd.log &>/dev/null
   else
@@ -148,6 +148,7 @@ else
       --restart=unless-stopped \
       --privileged \
       -e TZ="$SERVER_TIMEZONE" \
+      -v "$DATADIR/log":/var/log/dictd \
       -p $SERVER_PORT:$SERVER_PORT_INT \
       "$HUB_URL" &>/dev/null
   fi
@@ -167,7 +168,7 @@ dockermgr_install_version
 if docker ps -a | grep -qs "$APPNAME"; then
   printf_blue "DATADIR in $DATADIR"
   printf_cyan "Installed to $INSTDIR"
-  printf_blue "Service is available at: http://$SERVER_HOST:$SERVER_PORT"
+  printf_blue "Service is available at: $SERVER_HOST:$SERVER_PORT"
 else
   printf_error "Something seems to have gone wrong with the install"
 fi
