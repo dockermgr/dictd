@@ -17,10 +17,10 @@ if [[ "$1" == "--debug" ]]; then shift 1 && set -xo pipefail && export SCRIPT_OP
 # @Copyright     : Copyright: (c) 2021 Jason Hempstead, Casjays Developments
 # @Created       : Saturday, Aug 28, 2021 20:20 EDT
 # @File          : dictd
-# @Description   : 
-# @TODO          : 
-# @Other         : 
-# @Resource      : 
+# @Description   : A dictionary database server
+# @TODO          :
+# @Other         :
+# @Resource      :
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Import functions
 CASJAYSDEVDIR="${CASJAYSDEVDIR:-/usr/local/share/CasjaysDev/scripts}"
@@ -65,10 +65,12 @@ APPVERSION="$(__appversion "$REPORAW/version.txt")"
 # Setup plugins
 HUB_URL="casjaysdev/dictd"
 SERVER_HOST="${APPNAME:-$(hostname -f 2>/dev/null)}"
-SERVER_PORT="${SERVER_PORT:-15002}"
+SERVER_PORT="${SERVER_PORT:-2628}"
 SERVER_PORT_INT="${SERVER_PORT_INT:-2628}"
 SERVER_PORT_SSL="${SERVER_PORT_SSL:-15100}"
 SERVER_PORT_SSL_INT="${SERVER_PORT_SSL_INT:-443}"
+SERVER_PORT_ADMIN="${SERVER_PORT_SSL:-16000}"
+SERVER_PORT_ADMIN_INT="${SERVER_PORT_SSL_INT:-8080}"
 SERVER_TIMEZONE="${TZ:-${TIMEZONE:-America/New_York}}"
 SERVER_SSL="${SERVER_SSL:-false}"
 SERVER_SSL_CRT="/etc/ssl/CA/CasjaysDev/certs/localhost.crt"
@@ -131,23 +133,23 @@ else
   fi
   if __enable_ssl && __ssl_certs "$SERVER_SSL_CRT" "$SERVER_SSL_KEY"; then
     ## SSL
-  __sudo docker run -d \
-    --name="$APPNAME" \
-    --hostname "$SERVER_HOST" \
-    --restart=unless-stopped \
-    --privileged \
-    -e TZ="$SERVER_TIMEZONE" \
-    -p $SERVER_PORT:$SERVER_PORT_INT \
-    "$HUB_URL" --verbose --log /var/log/dictd/dictd.log &>/dev/null
+    __sudo docker run -d \
+      --name="$APPNAME" \
+      --hostname "$SERVER_HOST" \
+      --restart=unless-stopped \
+      --privileged \
+      -e TZ="$SERVER_TIMEZONE" \
+      -p $SERVER_PORT:$SERVER_PORT_INT \
+      "$HUB_URL" --verbose --log /var/log/dictd/dictd.log &>/dev/null
   else
-  __sudo docker run -d \
-    --name="$APPNAME" \
-    --hostname "$SERVER_HOST" \
-    --restart=unless-stopped \
-    --privileged \
-    -e TZ="$SERVER_TIMEZONE" \
-    -p $SERVER_PORT:$SERVER_PORT_INT \
-    "$HUB_URL" &>/dev/null
+    __sudo docker run -d \
+      --name="$APPNAME" \
+      --hostname "$SERVER_HOST" \
+      --restart=unless-stopped \
+      --privileged \
+      -e TZ="$SERVER_TIMEZONE" \
+      -p $SERVER_PORT:$SERVER_PORT_INT \
+      "$HUB_URL" &>/dev/null
   fi
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
