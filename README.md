@@ -39,7 +39,7 @@ sudo docker run -d \
 --privileged \
 -e TZ="${TZ:-${TIMEZONE:-America/New_York}}" \
 -p 2628:2628 \
-casjaysdev/dictd 1>/dev/null
+casjaysdev/dictd &>/dev/null
 ```
 
 ## Author  
