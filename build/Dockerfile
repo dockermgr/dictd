@@ -18,6 +18,7 @@ LABEL org.casjaysdev.image.authors="git-admin@casjaysdev.com"
 
 COPY ./etc/dictd/. /etc/dictd/
 COPY ./etc/default/dictd /etc/default/dictd
+COPY ./usr/bin/entrypoint.sh /usr/bin/entrypoint.sh
 
 RUN mkdir -p /var/log/dictd && touch /var/log/dictd/server.log && chmod -Rfv 777 /etc/dictd /var/log/dictd
 
