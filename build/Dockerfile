@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get install -yy apt-utils locales dialog
 RUN localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-RUN apt-get update && apt-get install -yy dictd* dict-* && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -yy procps dictd* dict-* && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 FROM dictBuild
 
@@ -26,7 +26,7 @@ EXPOSE 2628
 
 VOLUME [ "/config" ]
 
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s CMD [ "ps -ux | grep '[d]ict$'" ]
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s CMD /usr/bin/entrypoint.sh --health; exit $?
 
 ENV HOSTNAME dictd
 
